@@ -10,10 +10,10 @@ var map = new mapboxgl.Map({
 //Display Map Nav Controls
 map.addControl(new mapboxgl.NavigationControl());
 
-//Display Map Popups
+//Display Map Popups for POIs
 map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['rtdl']
+    layers: ['rtdl-poi']
   });
 
   if (!features.length) {
@@ -28,3 +28,11 @@ map.on('click', function(e) {
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
+
+//Geolocate user
+map.addControl(new mapboxgl.GeolocateControl({
+  positionOptions: {
+    enableHighAccuracy: true
+  },
+    trackUserLocation: true
+}));
